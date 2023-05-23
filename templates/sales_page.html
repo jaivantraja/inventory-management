@@ -1,0 +1,68 @@
+<!-- sales_page.html -->
+{% extends 'base.html' %}
+{% block content %}
+    <div class="header">
+        <h1> Sales </h1>
+    </div>
+    <div class="contents">
+     <div class="top-bar">
+        <button class="sales-btn"> MAKE A SALE</button>
+    </div>
+    <div style="overflow: auto; height: 410px" >
+    <table style="width: 100%;">
+      <thead>
+        <tr>
+          <th>Sender GST Number</th>
+            <th>Bill Number</th>
+             <th>GST Number</th>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Cost</th>
+          <th>Total Cost</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+        <tbody>
+        {% if sales_items %}
+            {% for item in sales_items %}
+                <tr>
+               <td>{{ item.sender_gst }}</td>
+                    <td>{{ item.bill_number}}</td>
+                    <td>{{ item.gst_number }}</td>
+                <td>{{ item.product_name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.cost }}</td>
+                <td>{{ item.total_cost }}</td>
+                <td>{{ item.date }}</td>
+            </tr>
+            {%  endfor %}
+        {% else %}
+            <td> No sales made </td>
+        {%  endif %}
+         </tbody>
+    </table>
+    </div>
+    <div class="popup-form-container">
+      <div class="popup-form">
+        <h3>Make A Sale</h3>
+        <form method="POST" action="{% url 'sold' %}">
+            {% csrf_token %}
+            <label for="sender_gst_Number">Sender GST Number:</label>
+          <input type="text" id="sender_gst_number" name="sender_gst_number" placeholder="Enter your GST number">
+
+          <label for="gst_Number">GST Number:</label>
+          <input type="text" id="gst_number" name="gst_number" placeholder="Enter GST number">
+
+          <label for="productName">Product Name:</label>
+          <input type="text" id="product_ame" name="product_name" placeholder="Enter product name">
+
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" name="quantity" placeholder="Enter quantity">
+
+          <button type="submit" class="submit-btn">Add</button>
+          <button type="button" class="close-form-btn">Cancel</button>
+        </form>
+      </div>
+    </div>
+    </div>
+{% endblock %}

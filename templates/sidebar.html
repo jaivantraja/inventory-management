@@ -1,0 +1,23 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px;height: 100vh">
+    <span class="fs-4"><b>Inventory Management</b></span>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a href="{% url 'inventory' %}" class="nav-link link-body-emphasis">
+          Inventory
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a href="{% url 'purchase' %}" class="nav-link link-body-emphasis">
+          Purchases
+        </a>
+      </li>
+      <li class="nav-item active">
+        <a href="{% url 'sale' %}" class="nav-link link-body-emphasis">
+          Sales
+        </a>
+      </li>
+    </ul>
+    <hr>
+    <button>Logout</button>
+    </div>

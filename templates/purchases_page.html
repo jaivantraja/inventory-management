@@ -1,0 +1,67 @@
+<!-- purchases_page.html -->
+{% extends 'base.html' %}
+{% block content %}
+    <div class="header">
+        <h1> Purchases </h1>
+    </div>
+    <div class="contents">
+    <div class="top-bar">
+        <button class="purchase-btn"> MAKE A PURCHASE</button>
+    </div>
+    <div style="overflow: auto; height: 420px" >
+    <table style="width: 100%;">
+      <thead>
+        <tr>
+          <th>GST Number</th>
+            <th>Bill Number</th>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th>Cost</th>
+          <th>Total Cost</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+        <tbody>
+        {% if purchase_items %}
+        {% for purchase in purchase_items %}
+            <tr>
+              <td>{{ purchase.gst_number }}</td>
+                <td>{{ purchase.bill_number }}</td>
+              <td>{{ purchase.product_name }}</td>
+              <td>{{ purchase.quantity }}</td>
+              <td>{{ purchase.cost }}</td>
+              <td>{{ purchase.total_cost }}</td>
+              <td>{{ purchase.date }}</td>
+            </tr>
+        {%  endfor %}
+        {% else %}
+            <p> No purchases made  </p>
+        {%  endif %}
+        </tbody>
+    </table>
+    </div>
+    </div>
+    <div class="popup-form-container">
+      <div class="popup-form">
+        <h3>Add Purchase</h3>
+        <form method="POST" action="{% url 'purchased' %}">
+            {% csrf_token %}
+          <label for="gst_number">GST Number:</label>
+          <input type="text" id="gst_number" name="gst_number" placeholder="Enter GST number">
+
+          <label for="product_name">Product Name:</label>
+          <input type="text" id="product_name" name="product_name" placeholder="Enter product name">
+
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" name="quantity" placeholder="Enter quantity">
+
+          <label for="cost">Cost:</label>
+          <input type="text" id="cost" name="cost" placeholder="Enter cost">
+
+          <button type="submit" class="submit-btn">Add</button>
+          <button type="button" class="close-form-btn">Cancel</button>
+        </form>
+      </div>
+    </div>
+    </div>
+{% endblock %}
